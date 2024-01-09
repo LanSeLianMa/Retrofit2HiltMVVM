@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="bean"
+            type="com.example.retrofit2hiltmvvm.common.bean.ListBean.DatasBean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:background="@color/design_default_color_background"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="69dp">
+
+            <TextView
+                android:id="@+id/id_tv"
+                android:gravity="center"
+                android:background="@color/cardview_dark_background"
+                android:text="@{String.valueOf(bean.id)}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_width="80dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:paddingLeft="8dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/title_tv"
+                    android:layout_weight="1"
+                    android:text="@{bean.superChapterName}"
+                    android:textSize="12sp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+
+                <View
+                    android:background="@color/material_dynamic_primary90"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/describe_tv"
+                    android:layout_weight="1"
+                    android:text="@{bean.title}"
+                    android:textSize="10sp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/material_dynamic_primary80"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+    </LinearLayout>
+</layout>

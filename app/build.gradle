@@ -1,0 +1,76 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt' // 使用这个，必须把kotlin相关的基础包都加上
+    id 'com.google.dagger.hilt.android'
+}
+
+android {
+    namespace 'com.example.retrofit2hiltmvvm'
+    compileSdk 33
+
+    dataBinding.enabled true
+
+    defaultConfig {
+        applicationId "com.example.retrofit2hiltmvvm"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // 日志过滤器
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11'
+
+    // hilt
+    implementation 'com.google.dagger:hilt-android:2.44'
+    kapt "com.google.dagger:hilt-compiler:2.44"
+
+    // rxJava3
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
+
+    // retrofit2
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'     // gson
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'  // converterFactory的String依赖包
+    implementation 'com.squareup.retrofit2:adapter-guava:2.9.0' // guavaCallAdapterFactory 依赖
+
+    // 上拉加载 / 下拉刷新
+    implementation  'io.github.scwang90:refresh-layout-kernel:2.1.0'      //核心必须依赖
+    implementation  'io.github.scwang90:refresh-header-classics:2.1.0'    //经典刷新头
+    implementation  'io.github.scwang90:refresh-footer-classics:2.1.0'    //经典加载
+
+    // paging3
+    implementation "androidx.paging:paging-runtime:3.1.1"
+    implementation "androidx.paging:paging-rxjava3:3.1.1"
+    implementation "androidx.paging:paging-guava:3.1.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+    // autodispose
+    implementation 'com.uber.autodispose2:autodispose:2.2.1'
+    implementation 'com.uber.autodispose2:autodispose-androidx-lifecycle:2.2.1'
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
