@@ -3,11 +3,13 @@ package com.example.retrofit2hiltmvvm.common.net;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.retrofit2hiltmvvm.btn01.net.ApiService01;
 import com.example.retrofit2hiltmvvm.btn02.net.ApiService02;
 import com.example.retrofit2hiltmvvm.btn03.net.ApiService03;
 import com.example.retrofit2hiltmvvm.btn04.net.ApiService04;
+import com.example.retrofit2hiltmvvm.common.net.baseurlfactory.CallFactoryProxy;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +19,10 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
+import okhttp3.Call;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.guava.GuavaCallAdapterFactory;
@@ -96,6 +101,18 @@ public class RequestManager {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(client) // 可以不设置，Retrofit会自动生成一个client
+                .callFactory(new CallFactoryProxy((Call.Factory) client) { // 动态设置 baseUrl，注意：要写在 .client(client) 后面，不然会被覆盖掉，导致无效
+                    @Nullable
+                    @Override
+                    protected HttpUrl getNewUrl(String baseUrlName, Request request) {
+                        if (baseUrlName.equals("baidu")) {
+                            String oldUrl = request.url().toString();
+                            String newUrl = oldUrl.replace(baseUrl, "https://www.baidu.com/");
+                            return HttpUrl.get(newUrl);
+                        }
+                        return null;
+                    }
+                })
                 // 增加返回值为String的支持
                 .addConverterFactory(ScalarsConverterFactory.create())
                 // 增加返回值为Gson的支持(以实体类返回)
