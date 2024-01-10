@@ -101,7 +101,7 @@ public class RequestManager {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(client) // 可以不设置，Retrofit会自动生成一个client
-                .callFactory(new CallFactoryProxy((Call.Factory) client) { // 动态设置 baseUrl，注意：要写在 .client(client) 后面，不然会被覆盖掉，导致无效
+                .callFactory(new CallFactoryProxy((Call.Factory) client) { // 设置不同的 BaseUrl，注意：要写在 .client(client) 后面，不然会被覆盖掉，导致无效
                     @Nullable
                     @Override
                     protected HttpUrl getNewUrl(String baseUrlName, Request request) {

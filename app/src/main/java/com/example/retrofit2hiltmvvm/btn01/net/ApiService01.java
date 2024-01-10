@@ -22,7 +22,7 @@ public interface ApiService01 {
     Call<ResponseData<ListBean>> getList(@Path("pageNum") Integer pageNum);
 
     /**
-     * 替换不同的 BaseUrl
+     * 设置不同的 BaseUrl
      */
     // @Headers("BaseUrlName:baidu")
     // @GET("article/list/{pageNum}/json")
