@@ -1,4 +1,4 @@
-Android 框架 + Jetpack相关库 + MVVM 整合 使用。
+Java + Android 框架 + Jetpack相关库 + MVVM 整合 使用。
 
 * Retrofit2 + Hilt + MVVM 
 * Retrofit2 + Hilt + MVVM + RxJava3
